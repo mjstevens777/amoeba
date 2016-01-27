@@ -110,7 +110,7 @@ module Amoeba
 
     def process_overrides
       amoeba.overrides.each do |block|
-        block.call(@old_object, @new_object)
+        self.instance_exec @old_object, @new_object, &block
       end
     end
 
@@ -152,7 +152,7 @@ module Amoeba
     def process_customizations
       # prepend any extra strings to indicate uniqueness of the new record(s)
       amoeba.customizations.each do |block|
-        block.call(@old_object, @new_object)
+        self.instance_exec @old_object, @new_object, &block
       end
     end
 
